@@ -45,7 +45,7 @@ jobs:
         run: node --test scripts/everclaw-wallet.test.mjs
 
   proxy-tests:
-    name: Proxy Health Check
+    name: Proxy Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -58,15 +58,8 @@ jobs:
 
       - run: npm ci
 
-      - name: Start proxy with test key
-        env:
-          MORPHEUS_PROXY_API_KEY: "ci-test-key"
-        run: |
-          node scripts/morpheus-proxy.mjs &
-          sleep 4
-
-      - name: Test /health endpoint
-        run: curl -f http://127.0.0.1:8083/health
+      - name: Run proxy test suite
+        run: node --test scripts/morpheus-proxy.test.mjs
 
   security-scan:
     name: Secret Scanning
