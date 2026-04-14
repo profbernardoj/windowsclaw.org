@@ -2,6 +2,36 @@
 
 All notable changes to EverClaw are documented here.
 
+## [2026.4.14.0206] - 2026-04-14
+
+### Changed — OpenClaw Pin v2026.4.11 → v2026.4.12
+
+- **Dockerfile:** OpenClaw build target updated to `v2026.4.12`
+- **docker-compose.yml:** Image tag and build arg updated
+
+### Upstream Highlights (OpenClaw v2026.4.11 → v2026.4.12)
+
+#### New Features
+- **Active Memory plugin:** Dedicated memory sub-agent that auto-pulls relevant context/preferences before replies. Configurable modes, `/verbose` inspection.
+- **Codex provider:** Bundled provider for `codex/gpt-*` models with native auth, threads, and compaction
+- **LM Studio provider:** Bundled provider for local/self-hosted OpenAI-compatible models with auto-discovery
+- **macOS Talk Mode:** Experimental local MLX speech provider for Talk Mode
+- **Exec policy CLI:** `openclaw exec-policy` command for syncing exec approvals with config
+- **Plugin loading overhaul:** Manifest-declared activation scopes, narrower loading boundaries
+- **Per-provider allowPrivateNetwork:** Trusted self-hosted endpoints opt-in
+- **Gateway commands.list RPC:** Remote clients can discover runtime commands
+
+#### Fixes
+- **Security:** busybox/toybox removed from safe bins, empty approver list fix, shell-wrapper injection block, placeholder credential startup block
+- **Dreaming:** Promotion threshold raised (fixes zero-candidate stalls), light-sleep confidence from all signals, narrative cleanup hardened, no re-ingesting own transcripts
+- **Memory/QMD:** Better recall defaults, Unicode slug fix, nested daily notes support, direct memory dir watching (fixes macOS + Node 25 glob issue)
+- **Agents:** Orphaned user text carried into next prompt (fixes mid-run dropped messages), Anthropic replay safety
+- **Gateway:** Keepalive ticks no longer droppable, sidecar-gated startup, cron config persistence across reloads
+- **WhatsApp:** Fallback to first mediaUrls entry (fixes silently dropped attachments)
+- **CLI update:** Stale chunk import fix after self-update
+
+(Reference: https://github.com/openclaw/openclaw/releases/tag/v2026.4.12)
+
 ## [2026.4.12.1825] - 2026-04-12
 
 ### Changed — OpenClaw Pin v2026.4.9 → v2026.4.11
