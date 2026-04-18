@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Everclaw — AI Inference You Own</title>
-  <meta name="description" content="AI inference you own, forever powering your OpenClaw agents via the Morpheus decentralized network.">
+  <title>Morpheus Skill — AI Inference You Own</title>
+  <meta name="description" content="AI inference you own, forever powering your OpenClaw agents via the Morpheus decentralized network. Formerly EverClaw.">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>♾️</text></svg>">
   <style>
     :root {
@@ -306,6 +306,7 @@
       justify-content: center;
       gap: 24px;
       margin-bottom: 16px;
+      flex-wrap: wrap;
     }
 
     /* MOR Economics */
@@ -325,16 +326,17 @@
 
   <!-- Beta Banner -->
   <div class="beta-banner">
-    ⚠️ Everclaw is experimental beta open source software for testers only. Use at your own risk.
+    ⚠️ Morpheus Skill is experimental beta open source software for testers only. Use at your own risk.
   </div>
 
   <!-- Header -->
   <header>
     <div class="container">
       <div class="logo">♾️</div>
-      <h1><span>Everclaw</span></h1>
-      <p style="font-size: 13px; color: var(--accent); margin-bottom: 12px; letter-spacing: 1px;">v2026.3.20</p>
+      <h1><span>Morpheus Skill</span></h1>
+      <p style="font-size: 13px; color: var(--accent); margin-bottom: 12px; letter-spacing: 1px;">v2026.4.18</p>
       <p class="subtitle">Open-source first. GLM-5 handles everything — Claude is the escape hatch, not the default. AI inference you own, via the Morpheus decentralized network.</p>
+      <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Formerly EverClaw</p>
     </div>
   </header>
 
@@ -347,12 +349,12 @@
       <div class="path-card" onclick="showPath('new')" id="path-new">
         <div class="icon">🆕</div>
         <h3>New to OpenClaw</h3>
-        <p>Install OpenClaw first, then add Everclaw</p>
+        <p>One command installs everything — OpenClaw, Morpheus Skill, and all dependencies</p>
       </div>
       <div class="path-card" onclick="showPath('existing')" id="path-existing">
         <div class="icon">⚡</div>
         <h3>Already have OpenClaw</h3>
-        <p>Add Everclaw to your existing setup</p>
+        <p>Add Morpheus Skill to your existing setup</p>
       </div>
     </div>
   </div>
@@ -360,72 +362,49 @@
   <!-- Path: New Users -->
   <div class="container">
     <div class="section" id="section-new">
-      <h2>Install OpenClaw + Everclaw</h2>
+      <h2>One-Line Install</h2>
 
       <div class="step">
         <div class="step-header">
           <div class="step-number">1</div>
-          <h3>Install OpenClaw</h3>
+          <h3>Install Everything</h3>
         </div>
-        <p>OpenClaw is the AI agent framework that Everclaw extends. Install it with npm:</p>
+        <p>One command. Zero prompts. Detects your OS and hardware, installs all dependencies (Node.js, OpenClaw, Morpheus Skill), and configures your agent automatically:</p>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code>npm install -g openclaw</code>
+          <code>curl -fsSL https://get.everclaw.xyz | bash</code>
         </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">This guided installer:</p>
+        <ul style="font-size: 13px; color: var(--text-muted); margin-left: 20px; margin-top: 4px;">
+          <li>✅ Checks for required dependencies (curl, git, Node.js, npm, Homebrew, OpenClaw)</li>
+          <li>✅ Auto-installs missing dependencies with real verification</li>
+          <li>✅ Works on <strong>admin and non-admin macOS accounts</strong> (nvm fallback for Node.js)</li>
+          <li>✅ Supports Apple Silicon and Intel Macs, Linux x86_64 and arm64</li>
+          <li>✅ Bootstraps a <strong>free GLM-5 starter key</strong> (1,000 requests/day)</li>
+          <li>✅ Optionally installs the Morpheus proxy-router for P2P inference</li>
+        </ul>
       </div>
 
       <div class="step">
         <div class="step-header">
           <div class="step-number">2</div>
-          <h3>Run the OpenClaw Setup Wizard</h3>
+          <h3>Configure Your Agent</h3>
         </div>
-        <p>This configures your agent, sets up your model provider, and creates your workspace:</p>
+        <p>The installer runs setup automatically, but if you need to reconfigure later:</p>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code>openclaw onboard</code>
+          <code>node ~/.openclaw/workspace/skills/everclaw/scripts/setup.mjs --key YOUR_KEY --apply --test --restart</code>
         </div>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Get a free API key at <a href="https://app.mor.org" style="color: var(--accent);">app.mor.org</a>. Gateway-only (no local proxy): add <code style="font-size: 12px;">--template gateway-only</code>.</p>
       </div>
+
+      <p style="text-align: center; color: var(--text-muted); font-size: 14px; margin: 24px 0 16px; border-top: 1px solid var(--border); padding-top: 24px;">
+        <strong>Optional:</strong> For local P2P inference (stake MOR tokens), continue with steps 3–5:
+      </p>
 
       <div class="step">
         <div class="step-header">
           <div class="step-number">3</div>
-          <h3>Install Everclaw</h3>
-        </div>
-        <p>Install from ClawHub (easiest) or the command-line installer:</p>
-        <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code>clawhub install everclaw-inference</code>
-        </div>
-        <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Or: <code style="font-size: 12px;">curl -fsSL https://raw.githubusercontent.com/EverClaw/EverClaw/main/scripts/install-everclaw.sh | bash</code></p>
-      </div>
-
-      <div class="step">
-        <div class="step-header">
-          <div class="step-number">4</div>
-          <h3>Install the Morpheus Router</h3>
-        </div>
-        <p>Downloads the Morpheus proxy-router for your platform:</p>
-        <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code>bash ~/.openclaw/workspace/skills/everclaw/scripts/install.sh</code>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-header">
-          <div class="step-number">5</div>
-          <h3>Set Up the Proxy &amp; Guardian</h3>
-        </div>
-        <p>Installs the OpenAI-compatible proxy and the gateway health monitor:</p>
-        <div class="code-block">
-          <button class="copy-btn" onclick="copyCode(this)">Copy</button>
-          <code>bash ~/.openclaw/workspace/skills/everclaw/scripts/install-proxy.sh</code>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="step-header">
-          <div class="step-number">6</div>
           <h3>Create Your Wallet</h3>
         </div>
         <p>Generates an Ethereum wallet and stores the private key in your macOS Keychain. No external accounts needed.</p>
@@ -437,10 +416,10 @@
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">7</div>
+          <div class="step-number">4</div>
           <h3>Fund Your Wallet</h3>
         </div>
-        <p>Send ETH to your wallet address (shown after setup). You need a small amount of ETH on Base for gas and to swap for MOR tokens. Then swap:</p>
+        <p>Send ETH to your wallet address (shown after setup). You need a small amount of ETH on Base for gas and to swap for MOR tokens:</p>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code><span class="comment"># Swap 0.05 ETH for MOR tokens</span>
@@ -453,7 +432,7 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
 
       <div class="step">
         <div class="step-header">
-          <div class="step-number">8</div>
+          <div class="step-number">5</div>
           <h3>Start Inference</h3>
         </div>
         <p>Launch the Morpheus router. Your agent now has access to decentralized AI inference.</p>
@@ -473,19 +452,19 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
   <!-- Path: Existing OpenClaw Users -->
   <div class="container">
     <div class="section" id="section-existing">
-      <h2>Add Everclaw to OpenClaw</h2>
+      <h2>Add Morpheus Skill to OpenClaw</h2>
 
       <div class="step">
         <div class="step-header">
           <div class="step-number">1</div>
-          <h3>Install Everclaw</h3>
+          <h3>Install Morpheus Skill</h3>
         </div>
         <p>Install from <a href="https://clawhub.ai/EverClaw/everclaw-inference" style="color: var(--accent);">ClawHub</a> or the command-line installer:</p>
         <div class="code-block">
           <button class="copy-btn" onclick="copyCode(this)">Copy</button>
           <code>clawhub install everclaw-inference</code>
         </div>
-        <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Or: <code style="font-size: 12px;">curl -fsSL https://raw.githubusercontent.com/EverClaw/EverClaw/main/scripts/install-everclaw.sh | bash</code></p>
+        <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Or use the full installer: <code style="font-size: 12px;">curl -fsSL https://get.everclaw.xyz | bash</code></p>
       </div>
 
       <div class="step">
@@ -573,42 +552,11 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
       <div class="flow">
         <div class="flow-step">Your Agent</div>
         <span class="flow-arrow">→</span>
-        <div class="flow-step">Everclaw Proxy</div>
+        <div class="flow-step">Morpheus Skill Proxy</div>
         <span class="flow-arrow">→</span>
         <div class="flow-step">Morpheus P2P</div>
         <span class="flow-arrow">→</span>
         <div class="flow-step">AI Model</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- What's New -->
-  <div class="container" style="margin-top: 32px;">
-    <div style="background: var(--accent-glow); border: 1px solid rgba(108, 92, 231, 0.3); border-radius: var(--radius); padding: 24px;">
-      <h3 style="font-size: 18px; margin-bottom: 12px;">🆕 What's New in v2026.3.20</h3>
-      <div class="whats-new-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 14px;">
-        <div>
-          <strong style="color: var(--green);">🔧 14 Bug Fixes from Full Audit</strong>
-          <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Complete codebase audit: bash arithmetic fixes, gateway fallback routing, PII detection, session management, Docker updates. All 17 tests passing, PII Guard clean.</p>
-        </div>
-        <div>
-          <strong style="color: var(--green);">🛡️ Production Hardened</strong>
-          <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Restored truncated key-api server, rewrote corrupted update checker, added phone detection to PII scanner, fixed boot template placeholders, synced SmartAgent gateway-guardian.</p>
-        </div>
-      </div>
-      <div class="whats-new-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; font-size: 14px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(108, 92, 231, 0.15);">
-        <div>
-          <strong style="color: var(--text-muted);">v2026.3.6 — Guided Installer</strong>
-          <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">One-command setup, bootstrap keys, CI pipeline</p>
-        </div>
-        <div>
-          <strong style="color: var(--text-muted);">v2026.2.26 — PII Guard V2</strong>
-          <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Deep scanning, flavor templates, Docker support</p>
-        </div>
-        <div>
-          <strong style="color: var(--text-muted);">v2026.2.23 — First Release</strong>
-          <p style="color: var(--text-muted); font-size: 12px; margin-top: 4px;">Model router, wallet, proxy, security suite</p>
-        </div>
       </div>
     </div>
   </div>
@@ -619,18 +567,18 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
     <div class="features">
       <div class="feature">
         <div class="icon">🚀</div>
-        <h4>Zero-Config Bootstrap</h4>
-        <p>One command gives new users instant AI inference via the Morpheus API Gateway. No API key, no wallet, no node — just run and go.</p>
+        <h4>One-Line Install</h4>
+        <p>One command installs everything — OpenClaw, Morpheus Skill, Node.js, dependencies. Zero prompts, auto-detects your hardware.</p>
       </div>
       <div class="feature">
         <div class="icon">🔑</div>
-        <h4>Multi-Key Rotation</h4>
-        <p>Add multiple Venice API keys. When one runs out of DIEM credits, auto-rotates to the next. Stay on Claude instead of falling to cheaper models.</p>
+        <h4>Free Starter Key</h4>
+        <p>Bootstrap with a free GLM-5 key (1,000 requests/day) via the Morpheus API Gateway. No wallet needed to get started.</p>
       </div>
       <div class="feature">
         <div class="icon">♾️</div>
         <h4>Decentralized Inference</h4>
-        <p>Access GLM-5 (Opus 4.5-level), GLM-4.7 Flash, Kimi K2.5, and 30+ models through the Morpheus P2P network.</p>
+        <p>Access GLM-5, GLM-5.1, GLM-4.7 Flash, Kimi K2.5, and 30+ models through the Morpheus P2P network.</p>
       </div>
       <div class="feature">
         <div class="icon">🔌</div>
@@ -654,8 +602,8 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
       </div>
       <div class="feature">
         <div class="icon">🛡️</div>
-        <h4>Gateway Guardian v4</h4>
-        <p>Billing-aware escalation — classifies errors, skips useless restarts for credit exhaustion. Through-OpenClaw probes, credit monitoring, circuit breaker, fixed restart chain. Signal notifications with DIEM reset ETA.</p>
+        <h4>Gateway Guardian v5</h4>
+        <p>Billing-aware escalation — classifies errors, skips useless restarts for credit exhaustion. Direct curl inference probes, credit monitoring, circuit breaker, nuclear self-healing restart.</p>
       </div>
       <div class="feature">
         <div class="icon">🔐</div>
@@ -663,9 +611,9 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
         <p>Private keys stored in macOS Keychain. No 1Password, no external accounts. Generate, swap, and stake in one script.</p>
       </div>
       <div class="feature">
-        <div class="icon">📦</div>
-        <h4>Smart Session Archiver</h4>
-        <p>Size-triggered archiving prevents dashboard overload. Monitors session size, archives old sessions above 10MB. Runs as cron — no-op when healthy.</p>
+        <div class="icon">🧠</div>
+        <h4>Local Ollama Fallback</h4>
+        <p>Hardware-aware model selection — Gemma 4 family (E2B/E4B/26B/31B) with vision + audio, auto-selected based on available RAM/GPU.</p>
       </div>
       <div class="feature">
         <div class="icon">🔍</div>
@@ -694,11 +642,12 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
         </thead>
         <tbody>
           <tr><td><strong>GLM-5 ⭐</strong></td><td>General</td><td>Default — Opus 4.5-level, STANDARD + HEAVY tier</td></tr>
+          <tr><td><strong>GLM-5.1</strong></td><td>General</td><td>Latest GLM model</td></tr>
           <tr><td><strong>GLM 4.7 Flash</strong></td><td>Fast</td><td>LIGHT tier — cron, heartbeats, simple lookups</td></tr>
           <tr><td>Kimi K2.5</td><td>General</td><td>Solid general model</td></tr>
           <tr><td>Kimi K2 Thinking</td><td>Reasoning</td><td>Extended thinking for complex tasks</td></tr>
           <tr><td>GLM-5:web</td><td>General + Web</td><td>GLM-5 with web search</td></tr>
-          <tr><td>GLM 4.7</td><td>General</td><td>Full GLM model</td></tr>
+          <tr><td>GLM-5.1:web</td><td>General + Web</td><td>GLM-5.1 with web search</td></tr>
           <tr><td>Qwen3 235B</td><td>General</td><td>Large parameter count</td></tr>
           <tr><td>GPT-OSS 120B</td><td>General</td><td>OpenAI's open-source model</td></tr>
         </tbody>
@@ -711,17 +660,17 @@ node ~/.openclaw/workspace/skills/everclaw/scripts/everclaw-wallet.mjs approve</
     <div class="container">
       <div class="footer-links">
         <a href="https://clawhub.ai/EverClaw/everclaw-inference">ClawHub</a>
-        <a href="https://github.com/EverClaw/EverClaw">GitHub</a>
-        <a href="https://github.com/EverClaw/EverClaw/blob/main/SKILL.md">Full Docs</a>
-        <a href="https://github.com/EverClaw/EverClaw/releases/tag/v2026.3.20">Release Notes</a>
+        <a href="https://github.com/profbernardoj/morpheus-skill">GitHub</a>
+        <a href="https://github.com/profbernardoj/morpheus-skill/blob/main/SKILL.md">Full Docs</a>
+        <a href="https://github.com/profbernardoj/morpheus-skill/releases">Releases</a>
         <a href="https://mor.org">Morpheus AI</a>
         <a href="https://openclaw.ai">OpenClaw</a>
         <a href="https://x402.org">x402 Protocol</a>
         <a href="https://www.8004scan.io">8004scan</a>
         <a href="https://app.uniswap.org/explore/tokens/base/0x7431ada8a591c955a994a21710752ef9b882b8e3">Get MOR</a>
       </div>
-      <p>Everclaw is experimental beta open source software for testers only.<br>Use at your own risk. MIT License.</p>
-      <p style="margin-top: 12px;">Powered by <a href="https://mor.org">Morpheus</a> · Built for <a href="https://openclaw.ai">OpenClaw</a></p>
+      <p>Morpheus Skill is experimental beta open source software for testers only.<br>Use at your own risk. MIT License.</p>
+      <p style="margin-top: 12px;">Powered by <a href="https://mor.org">Morpheus</a> · Built for <a href="https://openclaw.ai">OpenClaw</a> · Formerly EverClaw</p>
     </div>
   </footer>
 
