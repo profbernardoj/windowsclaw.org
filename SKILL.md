@@ -2761,6 +2761,7 @@ Deploy a network of AI agents that coordinate on behalf of their humans over sec
 | `buddy-registry.mjs` | Local registry of known buddy bots and their capabilities |
 | `buddy-host.mjs` | Auto-provision buddy bots when new group chats are created |
 | `buddy-coordinate.mjs` | Bot-to-bot coordination payloads (scheduling, recommendations, group planning) |
+| `buddy-export.mjs` | Scoped agent export/import — portable tar.gz archives with conflict detection |
 
 ### Coordination Types
 
@@ -2809,6 +2810,39 @@ node scripts/buddy-coordinate.mjs --status
 - No npm dependencies (zero-dep validation)
 - Case-insensitive peer address matching
 - Whitespace-only string rejection for all ID fields
+
+### Agent Export & Import
+
+```bash
+# Export a buddy bot's data (workspace, XMTP identity, registry entry, peer entry)
+node scripts/buddy-export.mjs --agent-id alice --output ~/alice-backup.tar.gz
+
+# Dry run (shows what would be exported without creating archive)
+node scripts/buddy-export.mjs --agent-id alice --dry-run
+
+# Export without XMTP identity (workspace + registry only)
+node scripts/buddy-export.mjs --agent-id alice --output ~/alice-backup.tar.gz --no-xmtp
+
+# List all exportable agents
+node scripts/buddy-export.mjs --list
+
+# Import on another host
+node scripts/buddy-export.mjs --import ~/alice-backup.tar.gz
+
+# Import with checksum verification
+node scripts/buddy-export.mjs --import ~/alice-backup.tar.gz --checksum <sha256>
+
+# Force overwrite existing data
+node scripts/buddy-export.mjs --import ~/alice-backup.tar.gz --force
+```
+
+**Security:**
+- Pre-extraction tar content validation (path traversal protection)
+- Post-extraction defense-in-depth + symlink escape detection
+- SHA-256 checksum verification before extraction
+- Conflict detection blocks overwrite unless `--force`
+- 500 MB archive size limit
+- Atomic registry/peer merge via tmp+rename pattern
 
 ---
 
