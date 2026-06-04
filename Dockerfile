@@ -68,8 +68,21 @@ WORKDIR /openclaw
 RUN git clone --depth 1 --branch ${OPENCLAW_VERSION} https://github.com/openclaw/openclaw.git . && \
     rm -rf .git
 
-# Copy EverClaw core skill into build context (monorepo: packages/core/ is the skill)
-COPY --chown=node:node packages/core /everclaw-skill
+# Copy EverClaw skill into build context (monorepo: scripts/, SKILL.md, etc. at root)
+# Copy skill files needed for the OpenClaw integration
+COPY --chown=node:node scripts /everclaw-skill/scripts
+COPY --chown=node:node SKILL.md /everclaw-skill/SKILL.md
+COPY --chown=node:node AGENTS.md /everclaw-skill/AGENTS.md
+COPY --chown=node:node USER.md /everclaw-skill/USER.md
+COPY --chown=node:node SOUL.md /everclaw-skill/SOUL.md
+COPY --chown=node:node IDENTITY.md /everclaw-skill/IDENTITY.md
+COPY --chown=node:node BRAIN.md /everclaw-skill/BRAIN.md
+COPY --chown=node:node TOOLS.md /everclaw-skill/TOOLS.md
+COPY --chown=node:node VOICE.md /everclaw-skill/VOICE.md
+COPY --chown=node:node memory /everclaw-skill/memory
+COPY --chown=node:node skills /everclaw-skill/skills
+COPY --chown=node:node package.json /everclaw-skill/package.json
+COPY --chown=node:node config /everclaw-skill/config
 
 # Install dependencies
 RUN pnpm install --frozen-lockfile
@@ -94,7 +107,7 @@ FROM node:22-bookworm-slim AS auth-proxy-builder
 
 WORKDIR /auth-proxy
 
-# Copy auth proxy files from the build context
+# Copy auth proxy files from the build context (monorepo: packages/core/auth-proxy/)
 COPY packages/core/auth-proxy/package.json packages/core/auth-proxy/package-lock.json* ./
 COPY packages/core/auth-proxy/server.mjs ./
 COPY packages/core/auth-proxy/login.html ./
@@ -159,8 +172,10 @@ RUN cd /app && npm install node-llama-cpp@3.18.1 --no-save 2>&1 || true
 # Copy EverClaw skill into the workspace
 COPY --from=openclaw-builder --chown=node:node /everclaw-skill /home/node/.openclaw/workspace/skills/everclaw
 
-# Copy flavor overlays into the skill directory (monorepo: flavors/ is at repo root)
-COPY --chown=node:node flavors /home/node/.openclaw/workspace/skills/everclaw/flavors
+# Copy flavor overlays into the skill directory (if flavors/ exists)
+# Monorepo note: flavors/ directory may not exist in all versions
+# The flavor overlay system allows per-flavor customization
+COPY --chown=node:node flavors* /home/node/.openclaw/workspace/skills/everclaw/
 
 # Install EverClaw runtime dependencies in the OpenClaw workspace.
 # These are also declared in root package.json for CI testing, but Docker
@@ -178,13 +193,13 @@ WORKDIR /app
 # the config file does not already exist.
 RUN mkdir -p /opt/everclaw/defaults
 
-COPY packages/core/config/openclaw-default.json /opt/everclaw/defaults/openclaw-default.json
+COPY config/openclaw-default.json /opt/everclaw/defaults/openclaw-default.json
 RUN chown node:node /opt/everclaw/defaults/openclaw-default.json
 
 # ─── Boot File Templates ─────────────────────────────────────────────────────
 # Copy boot templates to workspace if they don't already exist (first run)
 
-COPY --chown=node:node packages/core/scripts/docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY --chown=node:node scripts/docker-entrypoint.sh /app/docker-entrypoint.sh
 RUN chmod +x /app/docker-entrypoint.sh
 
 # ─── Flavor Overlay ───────────────────────────────────────────────────────────
