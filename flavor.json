@@ -1,10 +1,9 @@
 {
-  "name": "Morpheus Skill",
-  "slug": "morpheus-skill",
-  "domain": "morpheusclaw.com",
-  "description": "The canonical Morpheus decentralized AI agent skill for OpenClaw",
-  "remote": "https://github.com/profbernardoj/morpheus-skill.git",
+  "name": "Windows Claw",
+  "slug": "windowsclaw",
+  "domain": "windowsclaw.org",
+  "description": "AI agent for Windows systems",
+  "remote": "https://github.com/profbernardoj/windowsclaw.org.git",
   "defaultModel": "glm-5",
-  "persona": "Morpheus decentralized AI assistant",
-  "canonical": true
+  "persona": "Windows-focused AI assistant"
 }
